@@ -16,6 +16,10 @@ var FormBuilder = (function () {
     checkbox.type = 'checkbox';
     checkbox.value = user.name;
     checkbox.id = 'chk' + id;
+    checkbox.className = 'checkbox';
+    checkbox.addEventListener('click', function () {
+      console.log('foo');
+    });
 
     var label = document.createElement('label')
     label.htmlFor = 'chk' + id;
