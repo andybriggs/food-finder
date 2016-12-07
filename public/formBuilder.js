@@ -1,6 +1,6 @@
 'use strict';
 
-var FoodFinder = (function () {
+var FormBuilder = (function () {
 
   var module = {};
 
@@ -11,7 +11,6 @@ var FoodFinder = (function () {
   };
 
   var buildUserListItem = function(user, id) {
-    console.log(user);
     var listItem = document.createElement('li'),
     checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -28,21 +27,21 @@ var FoodFinder = (function () {
     return listItem;
   };
 
-  var buildList = function(listItems, listItemBuilder) {
+  var buildList = function(listItems, listItemBuilder, el) {
     var newList = document.createElement('ul');
     for (var i = 0; i < listItems.length; i++) {
       var row = listItemBuilder(listItems[i], i);
       newList.appendChild(row);
     };
-    document.getElementById('app').appendChild(newList);
+    document.getElementById(el).appendChild(newList);
   };
 
   var buildForm = function(data) {
-    buildList(data.venues, buildVenueListItem);
-    buildList(data.users, buildUserListItem);
+    buildList(data.users, buildUserListItem, 'whos-about');
+    buildList(data.venues, buildVenueListItem, 'whats-tasty');
   }
 
-  module.run = function() {
+  module.build = function() {
     MockDataService.getData(buildForm);
   };
 
