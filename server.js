@@ -12,12 +12,8 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/users', function(req, res) {
-  res.json(mockData.users);
-});
-
-router.get('/venues', function(req, res) {
-  res.json(mockData.venues);
+router.get('/data', function(req, res) {
+  res.json(mockData);
 });
 
 var staticPath = path.join(__dirname, '/public');
