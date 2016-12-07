@@ -1,0 +1,27 @@
+body,
+html {
+  background: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  overflow: auto;
+  padding: 10px 20px;
+  margin: 20px 20px;
+  background: #fff;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+}
+h1 {
+  margin: 10px 0;
+}
+p {
+  margin-top: 0;
+  line-height: 24px;
+}

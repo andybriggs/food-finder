@@ -1,0 +1,25 @@
+{
+  "name": "food-finder",
+  "version": "1.0.0",
+  "description": "Food finder",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Andy Briggs",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jsdom": "^9.8.3",
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
+  }
+}
