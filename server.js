@@ -1,11 +1,28 @@
-var path = require('path');
-var express = require('express');
+var path = require('path'),
+express = require('express'),
+app = express(),
+port = process.env.PORT || 8080,
+mockData = require('./mockData');
 
-var app = express();
+// Routing
+var router = express.Router();
+
+router.use(function(req, res, next) {
+    console.log('Something is happening.');
+    next();
+});
+
+router.get('/users', function(req, res) {
+  res.json(mockData.users);
+});
+
+router.get('/venues', function(req, res) {
+  res.json(mockData.venues);
+});
 
 var staticPath = path.join(__dirname, '/public');
-app.use(express.static(staticPath));
+app.use(express.static(staticPath), router);
 
-app.listen(3000, function() {
-  console.log('listening on port 3000');
-});
+app.listen(port);
+
+console.log('App listening on port ' + port);
