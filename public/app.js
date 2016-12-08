@@ -2,10 +2,17 @@
 
 var App = (function () {
 
-  var module = {};
+  var module = {
+    receivedAppData: false,
+    appData: {}
+  };
 
   var update = function() {
-    console.log(FormBuilder.formData);
+    if(!module.receivedAppData) {
+      module.appData = FormBuilder.formData;
+    }
+    module.receivedAppData = true;
+    console.log(module);
   };
 
   module.run = function() {
