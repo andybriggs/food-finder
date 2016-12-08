@@ -2,7 +2,8 @@
 
 var FormBuilder = (function () {
 
-  var module = {};
+  var module = { formData: {} },
+  checkboxUpdate;
 
   var buildVenueListItem = function(venue) {
     var listItem = document.createElement('li');
@@ -17,8 +18,8 @@ var FormBuilder = (function () {
     checkbox.value = user.name;
     checkbox.id = 'chk' + id;
     checkbox.className = 'checkbox';
-    checkbox.addEventListener('click', function () {
-      console.log('foo');
+    checkbox.addEventListener('click', function() {
+      checkboxUpdate();
     });
 
     var label = document.createElement('label')
@@ -40,13 +41,19 @@ var FormBuilder = (function () {
     document.getElementById(el).appendChild(newList);
   };
 
-  var buildForm = function(data) {
-    buildList(data.users, buildUserListItem, 'whos-about');
-    buildList(data.venues, buildVenueListItem, 'whats-tasty');
+  var dataReady = function(data) {
+    module.formData = data;
+    buildList(module.formData.users, buildUserListItem, 'whos-about');
+    buildList(module.formData.venues, buildVenueListItem, 'whats-tasty');
   }
 
-  module.build = function() {
-    MockDataService.getData(buildForm);
+  module.formData = function(data) {
+    return data;
+  }
+
+  module.build = function(update) {
+    checkboxUpdate = update;
+    MockDataService.getData(dataReady);
   };
 
   return module;

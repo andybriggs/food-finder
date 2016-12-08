@@ -4,12 +4,12 @@ var App = (function () {
 
   var module = {};
 
-  var checkVenues = function() {
-    console.log('check venues');
+  var update = function() {
+    console.log(FormBuilder.formData);
   };
 
   module.run = function() {
-    FormBuilder.build(checkVenues);
+    FormBuilder.build(update);
   };
 
   return module;
