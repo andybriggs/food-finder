@@ -19,7 +19,7 @@ var FormBuilder = (function () {
     checkbox.id = 'chk' + id;
     checkbox.className = 'checkbox';
     checkbox.addEventListener('click', function() {
-      checkboxUpdate();
+      checkboxUpdate(this);
     });
 
     var label = document.createElement('label')
