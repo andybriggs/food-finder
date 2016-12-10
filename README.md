@@ -8,7 +8,7 @@
 
 `git clone git@github.com:andybriggs/food-finder.git`
 
-`cd book-list`
+`cd food-finder`
 
 `npm i`
 

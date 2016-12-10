@@ -5,7 +5,9 @@ var App = (function () {
   var module = {
     receivedAppData: false,
     appData: {
-      attendees: []
+      attendees: [],
+      venues: [],
+      foodPrefs: []
     }
   };
 
@@ -20,18 +22,29 @@ var App = (function () {
     return user;
   };
 
-  var checkFood = function() {
+  var checkVenues = function() {
     var venues = module.appData.venues,
-    attendees = module.appData.attendees;
+    foodPrefs = module.appData.foodPrefs;
     for(var i = 0; i < venues.length; i++) {
-      for(var x = 0; x < attendees.length; x++) {
-        for(var y = 0; y < attendees[x].wont_eat.length; y++) {
-          for(var z = 0; z < venues[i].food.length; z++) {
-            if(attendees[x].wont_eat[y] === venues[i].food[z]) {
-              console.log(venues[i].food[z]);
-            }
+      for (var x = 0; x < venues[i].food.length; x++) {
+        for(var y = 0; y < foodPrefs.length; y ++) {
+          if(foodPrefs[y] === venues[i].food[x]) {
+            console.log(venues[i].name + ' has ' + venues[i].food[x]);
           }
         }
+      }
+    }
+  };
+
+  var updatePrefs = function() {
+    var venues = module.appData.venues,
+    attendees = module.appData.attendees,
+    prefs = module.appData.foodPrefs;
+
+    for(var i = 0; i < attendees.length; i++) {
+      for(var x = 0; x < attendees[i].wont_eat.length; x++) {
+        prefs.push(attendees[i].wont_eat[x]);
+        console.log(prefs);
       }
     }
   };
@@ -57,7 +70,8 @@ var App = (function () {
     var user = getUserData(el.value);
     module.receivedAppData = true;
     updateAtendees(user, el.checked);
-    checkFood();
+    updatePrefs();
+    checkVenues();
     console.log(module.appData);
   };
 
