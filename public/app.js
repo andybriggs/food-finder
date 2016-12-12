@@ -26,10 +26,16 @@ var App = (function () {
     var venues = module.appData.venues,
     foodPrefs = module.appData.foodPrefs;
     for(var i = 0; i < venues.length; i++) {
+      var count = 0;
       for (var x = 0; x < venues[i].food.length; x++) {
         for(var y = 0; y < foodPrefs.length; y ++) {
-          if(foodPrefs[y] === venues[i].food[x]) {
-            console.log(venues[i].name + ' has ' + venues[i].food[x]);
+          if (count === venues[i].food.length) {
+            console.log(venues[i].name + ' is a write off');
+          } else if(foodPrefs[y] === venues[i].food[x] && count != venues[i].food.length) {
+            console.log(foodPrefs[y] + ' ' + venues[i].food[x]);
+            count ++;
+            console.log(count);
+            break;
           }
         }
       }
@@ -44,7 +50,6 @@ var App = (function () {
     for(var i = 0; i < attendees.length; i++) {
       for(var x = 0; x < attendees[i].wont_eat.length; x++) {
         prefs.push(attendees[i].wont_eat[x]);
-        console.log(prefs);
       }
     }
   };
