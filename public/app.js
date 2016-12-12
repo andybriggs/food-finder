@@ -26,15 +26,16 @@ var App = (function () {
     var venues = module.appData.venues,
     foodPrefs = module.appData.foodPrefs;
     for(var i = 0; i < venues.length; i++) {
-      var count = 0;
-      for (var x = 0; x < venues[i].food.length; x++) {
-        for(var y = 0; y < foodPrefs.length; y ++) {
-          if (count === venues[i].food.length) {
-            console.log(venues[i].name + ' is a write off');
-          } else if(foodPrefs[y] === venues[i].food[x] && count != venues[i].food.length) {
-            console.log(foodPrefs[y] + ' ' + venues[i].food[x]);
-            count ++;
-            console.log(count);
+      var conflicts = 0;
+      console.log('==============================');
+      console.log('Venue: ' + venues[i].name);
+      for(var x = 0; x < venues[i].food.length; x++) {
+        console.log('Compare : ' + venues[i].food[x]);
+        for(var y = 0; y < foodPrefs.length; y++) {
+          console.log('with: ' + foodPrefs[y]);
+          if(venues[i].food[x] === foodPrefs[y]) {
+            conflicts ++;
+            console.log(conflicts + ' conflict(s): ' + foodPrefs[y]);
             break;
           }
         }
