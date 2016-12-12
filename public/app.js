@@ -6,6 +6,7 @@ var App = (function () {
   users,
   venues,
   foodPrefs = [],
+  drinkPrefs = [],
   attendees = [],
   receivedAppData = false;
 
@@ -19,15 +20,18 @@ var App = (function () {
     return user;
   };
 
-  var checkVenues = function() {
+  var checkVenuesFood = function() {
     for(var i = 0; i < venues.length; i++) {
+      console.log('==========================================')
+      console.log('Venue: ' + venues[i].name);
       var conflicts = 0;
       for(var x = 0; x < venues[i].food.length; x++) {
         for(var y = 0; y < foodPrefs.length; y++) {
           if(venues[i].food[x] === foodPrefs[y]) {
             conflicts ++;
+            console.log('Conflict: ' + venues[i].food[x] + ' and ' + foodPrefs[y]);
             if(conflicts === venues[i].food.length) {
-              console.log('=================> ' + venues[i].name);
+              console.log('Thats all food items from ============================> ' + venues[i].name);
             }
             break;
           }
@@ -38,11 +42,11 @@ var App = (function () {
 
   var updatePrefs = function() {
     foodPrefs = [];
+    drinkPrefs = [];
     for(var i = 0; i < attendees.length; i++) {
-      for(var x = 0; x < attendees[i].wont_eat.length; x++) {
-        foodPrefs.push(attendees[i].wont_eat[x]);
-      }
-    }
+      foodPrefs = foodPrefs.concat(attendees[i].wont_eat);
+      drinkPrefs = drinkPrefs.concat(attendees[i].drinks);
+    };
   };
 
   var updateAttendees = function(user, checked) {
@@ -52,9 +56,9 @@ var App = (function () {
       for(var i = 0; i < attendees.length; i++) {
         if(attendees[i].name === user.name) {
           attendees.splice(i,1);
-        }
-      }
-    }
+        };
+      };
+    };
   };
 
   var updateApp = function(el) {
@@ -66,7 +70,9 @@ var App = (function () {
     receivedAppData = true;
     updateAttendees(user, el.checked);
     updatePrefs();
-    checkVenues();
+    checkVenuesFood();
+    console.log(foodPrefs);
+    console.log(drinkPrefs);
   };
 
   module.run = function() {
