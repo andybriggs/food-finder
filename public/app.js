@@ -65,10 +65,12 @@ var App = (function () {
     for(var i = 0; i < attendees.length; i++) {
       for(var x = 0; x < venues.length; x++) {
         var food = hasFood(attendees[i], venues[x]),
-        drink = hasDrink(attendees[i], venues[i]);
+        drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
           feedBackMessage(food, drink, attendees[i], venues[x]);
-          // scrubVenue(venues[x]);
+          scrubVenue(venues[x]);
+          console.log('Food at ' + venues[x].name + ': ' + food);
+          console.log('Drink at ' + venues[x].name + ': ' + drink);
         };
       };
     };
