@@ -13,9 +13,21 @@ var App = (function () {
     for(var i = 0; i < users.length; i++) {
       if(users[i].name === userName) {
         user = users[i];
-      }
-    }
+      };
+    };
     return user;
+  };
+
+  var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
+    var foodMsg = '',
+    drinkMsg = '';
+    if(!hasFood) {
+      foodMsg = ' no food ';
+    } else if (!hasDrink) {
+      drinkMsg = ' no drink '
+    }
+    var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
+    console.log(msg);
   };
 
   var hasDrink = function(attendee, venue) {
@@ -25,8 +37,8 @@ var App = (function () {
         if(venue.drinks[i] === attendee.drinks[x]) {
           drinks ++;
         };
-      }
-    }
+      };
+    };
     return drinks > 0 ? true : false;
   };
 
@@ -45,12 +57,12 @@ var App = (function () {
   var checkVenues = function() {
     for(var i = 0; i < attendees.length; i++) {
       for(var x = 0; x < venues.length; x++) {
-        if(!hasFood(attendees[i], venues[x]) || !hasDrink(attendees[i], venues[i])) {
-          console.log(venues[x].name + ' is off the cards');
-          console.log('Has food: ' + hasFood(attendees[i], venues[x]) + ' for ' + attendees[i].name);
-          console.log('Has drink: ' + hasDrink(attendees[i], venues[x]) + ' for ' + attendees[i].name);
+        var food = hasFood(attendees[i], venues[x]),
+        drink = hasDrink(attendees[i], venues[i]);
+        if(!food || !drink) {
+          feedBackMessage(food, drink, attendees[i], venues[x]);
         };
-      }
+      };
     };
   };
 
