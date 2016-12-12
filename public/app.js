@@ -36,6 +36,9 @@ var App = (function () {
           if(venues[i].food[x] === foodPrefs[y]) {
             conflicts ++;
             console.log(conflicts + ' conflict(s): ' + foodPrefs[y]);
+            if(conflicts === venues[i].food.length) {
+              console.log('=================>' + venues[i].name);
+            }
             break;
           }
         }
