@@ -31,13 +31,8 @@ var App = (function () {
   };
 
   var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
-    var foodMsg = '',
-    drinkMsg = '';
-    if(!hasFood) {
-      foodMsg = ' no food ';
-    } else if (!hasDrink) {
-      drinkMsg = ' no drink '
-    }
+    var foodMsg = hasFood ? '' : ' no food ';
+    var drinkMsg = hasDrink ? '' : ' no drink ';
     var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
     console.log(msg);
   };
@@ -73,7 +68,7 @@ var App = (function () {
         drink = hasDrink(attendees[i], venues[i]);
         if(!food || !drink) {
           feedBackMessage(food, drink, attendees[i], venues[x]);
-          scrubVenue(venues[x]);
+          // scrubVenue(venues[x]);
         };
       };
     };
@@ -101,6 +96,7 @@ var App = (function () {
     updateAttendees(user, el.checked);
     checkVenues();
     console.log(attendees);
+    console.log(venues);
   };
 
   module.run = function() {
