@@ -37,6 +37,7 @@ var App = (function () {
   };
 
   var updatePrefs = function() {
+    foodPrefs = [];
     for(var i = 0; i < attendees.length; i++) {
       for(var x = 0; x < attendees[i].wont_eat.length; x++) {
         foodPrefs.push(attendees[i].wont_eat[x]);
