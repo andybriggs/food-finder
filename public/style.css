@@ -33,3 +33,7 @@ li {
 input[type="checkbox"] {
   margin-right: 10px;
 }
+.scrubbed {
+  text-decoration: line-through;
+  color: #ccc;
+}

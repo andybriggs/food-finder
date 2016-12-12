@@ -18,6 +18,18 @@ var App = (function () {
     return user;
   };
 
+  var scrubVenue = function(venue) {
+    var venueListItems = document.getElementsByTagName("li");
+    var el;
+    for (var i = 0; i < venueListItems.length; i++) {
+      if (venueListItems[i].textContent == venue.name) {
+        el = venueListItems[i];
+        break;
+      }
+    }
+    el.className = 'scrubbed';
+  };
+
   var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
     var foodMsg = '',
     drinkMsg = '';
@@ -61,6 +73,7 @@ var App = (function () {
         drink = hasDrink(attendees[i], venues[i]);
         if(!food || !drink) {
           feedBackMessage(food, drink, attendees[i], venues[x]);
+          scrubVenue(venues[x]);
         };
       };
     };
