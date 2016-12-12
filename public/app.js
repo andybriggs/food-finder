@@ -3,12 +3,10 @@
 var App = (function () {
 
   var module = {},
+  receivedAppData = false,
   users,
   venues,
-  foodPrefs = [],
-  drinkPrefs = [],
-  attendees = [],
-  receivedAppData = false;
+  attendees = [];
 
   var getUserData = function(userName) {
     var user;
@@ -20,32 +18,39 @@ var App = (function () {
     return user;
   };
 
-  var checkVenuesFood = function() {
-    for(var i = 0; i < venues.length; i++) {
-      console.log('==========================================')
-      console.log('Venue: ' + venues[i].name);
-      var conflicts = 0;
-      for(var x = 0; x < venues[i].food.length; x++) {
-        for(var y = 0; y < foodPrefs.length; y++) {
-          if(venues[i].food[x] === foodPrefs[y]) {
-            conflicts ++;
-            console.log('Conflict: ' + venues[i].food[x] + ' and ' + foodPrefs[y]);
-            if(conflicts === venues[i].food.length) {
-              console.log('Thats all food items from ============================> ' + venues[i].name);
-            }
-            break;
-          }
-        }
+  var hasDrink = function(attendee, venue) {
+    var drinks = 0;
+    for(var i = 0; i < venue.drinks.length; i++) {
+      for(var x = 0; x < attendee.drinks.length; x++) {
+        if(venue.drinks[i] === attendee.drinks[x]) {
+          drinks ++;
+        };
       }
     }
+    return drinks > 0 ? true : false;
   };
 
-  var updatePrefs = function() {
-    foodPrefs = [];
-    drinkPrefs = [];
+  var hasFood = function(attendee, venue) {
+    var conflicts = 0;
+    for(var i = 0; i < venue.food.length; i++) {
+      for(var x = 0; x < attendee.wont_eat.length; x++) {
+        if(venue.food[i] === attendee.wont_eat[x]) {
+          conflicts ++;
+        };
+      };
+    };
+    return conflicts === venue.food.length ? false : true;
+  };
+
+  var checkVenues = function() {
     for(var i = 0; i < attendees.length; i++) {
-      foodPrefs = foodPrefs.concat(attendees[i].wont_eat);
-      drinkPrefs = drinkPrefs.concat(attendees[i].drinks);
+      for(var x = 0; x < venues.length; x++) {
+        if(!hasFood(attendees[i], venues[x]) || !hasDrink(attendees[i], venues[i])) {
+          console.log(venues[x].name + ' is off the cards');
+          console.log('Has food: ' + hasFood(attendees[i], venues[x]) + ' for ' + attendees[i].name);
+          console.log('Has drink: ' + hasDrink(attendees[i], venues[x]) + ' for ' + attendees[i].name);
+        };
+      }
     };
   };
 
@@ -65,14 +70,12 @@ var App = (function () {
     if(!receivedAppData) {
       users = FormBuilder.formData.users;
       venues = FormBuilder.formData.venues;
-    }
+    };
     var user = getUserData(el.value);
     receivedAppData = true;
     updateAttendees(user, el.checked);
-    updatePrefs();
-    checkVenuesFood();
-    console.log(foodPrefs);
-    console.log(drinkPrefs);
+    checkVenues();
+    console.log(attendees);
   };
 
   module.run = function() {
