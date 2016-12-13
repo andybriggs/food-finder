@@ -41,7 +41,7 @@ var App = (function () {
     var drinks = 0;
     for(var i = 0; i < venue.drinks.length; i++) {
       for(var x = 0; x < attendee.drinks.length; x++) {
-        if(venue.drinks[i] === attendee.drinks[x]) {
+        if(venue.drinks[i].toUpperCase() === attendee.drinks[x].toUpperCase()) {
           drinks ++;
         };
       };
