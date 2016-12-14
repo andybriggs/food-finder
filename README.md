@@ -2,7 +2,6 @@
 
 ## Prerequisite
  - Node.js - to install and run the local server
- - You can run the index.html directly in the browser if you do not have Node.js installed
 
 ## Setup
 
