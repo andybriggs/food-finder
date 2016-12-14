@@ -43,6 +43,13 @@ var App = (function () {
     return conflicts === venue.food.length ? false : true;
   };
 
+  var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
+    var foodMsg = hasFood ? '' : ' nothing to eat ',
+    drinkMsg = hasDrink ? '' : ' nothing to drink ',
+    msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' here';
+    return msg;
+  };
+
   var checkVenues = function() {
     conflictVenues = [];
     for(var i = 0; i < attendees.length; i++) {
@@ -50,8 +57,13 @@ var App = (function () {
         var food = hasFood(attendees[i], venues[x]),
         drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
-          PageBuilder.feedBackMessage(food, drink, attendees[i], venues[x]);
-          conflictVenues.push(venues[x].name);
+          var conflictVenue = venues[x];
+          if(!conflictVenue.msg) {
+            conflictVenue.msg = [feedBackMessage(food, drink, attendees[i], venues[x])];
+          } else {
+            conflictVenue.msg.push(feedBackMessage(food, drink, attendees[i], venues[x]));
+          }
+          conflictVenues.push(conflictVenue);
         };
       };
     };
@@ -79,7 +91,6 @@ var App = (function () {
     updateAttendees(user, el.checked);
     checkVenues();
     PageBuilder.scrubVenues(conflictVenues);
-    console.log(venues);
   };
 
   module.run = function() {

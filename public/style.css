@@ -82,10 +82,21 @@ ul {
 .whats-tasty li {
   float: left;
   width: 49%;
+  padding: 15px;
 }
 
 .whats-tasty li:nth-child(odd) {
   margin-right: 2%;
+}
+
+.whats-tasty span {
+  display: block;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.foo {
+  border: 5px solid red;
 }
 
 input[type="checkbox"] {

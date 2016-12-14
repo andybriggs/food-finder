@@ -8,7 +8,6 @@ var PageBuilder = (function () {
   var buildVenueListItem = function(venue) {
     var listItem = document.createElement('li'),
     label = document.createElement('label');
-
     listItem.appendChild(label);
     label.appendChild(document.createTextNode(venue.name));
     return listItem;
@@ -50,29 +49,46 @@ var PageBuilder = (function () {
     buildList(module.formData.venues, buildVenueListItem, 'whats-tasty');
   }
 
+  var attachMessages = function(el, messages) {
+    var messageContainer = el.getElementsByTagName('div')[0];
+    if(!messageContainer) {
+      messageContainer = document.createElement('div');
+    };
+    for(var i = 0; i < messages.length; i++) {
+      var msgEl = document.createElement('span');
+      msgEl.appendChild(document.createTextNode(messages[i]));
+      messageContainer.appendChild(msgEl);
+    };
+    el.appendChild(messageContainer);
+  };
+
+  var clearMessages = function(el) {
+    var messages = el.getElementsByTagName('div')[0];
+    if(messages) {
+      messages.parentNode.removeChild(messages);
+    };
+  };
+
   module.scrubVenues = function(conflictVenues) {
-    var venueListItems = document.getElementsByTagName("li");
+    var venueListItems = document.getElementsByTagName('li');
     for (var i = 0; i < venueListItems.length; i++) {
       if(conflictVenues.length > 0) {
         for(var x = 0; x < conflictVenues.length; x++) {
-          if (venueListItems[i].textContent.toUpperCase() == conflictVenues[x].toUpperCase()) {
+          var venueName = venueListItems[i].getElementsByTagName('label')[0];
+          if (venueName.textContent.toUpperCase() == conflictVenues[x].name.toUpperCase()) {
             venueListItems[i].className = 'scrubbed';
+            attachMessages(venueListItems[i], conflictVenues[x].msg);
             break;
           } else {
             venueListItems[i].className = '';
+            clearMessages(venueListItems[i]);
           };
         };
       } else {
         venueListItems[i].className = '';
+        clearMessages(venueListItems[i]);
       }
     };
-  };
-
-  module.feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
-    var foodMsg = hasFood ? '' : ' no food ';
-    var drinkMsg = hasDrink ? '' : ' no drink ';
-    var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
-    // console.log(msg);
   };
 
   module.formData = function(data) {
