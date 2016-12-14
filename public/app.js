@@ -50,6 +50,24 @@ var App = (function () {
     return msg;
   };
 
+  var addFeedbackMessage = function(venue, message) {
+    if(!venue.msg) {
+      venue.msg = [message];
+    } else {
+      var messageExists = false;
+      for(var i = 0; i < venue.msg.length; i++) {
+        if(venue.msg[i] === message) {
+          messageExists = true;
+          break;
+        }
+      }
+      if(!messageExists) {
+        venue.msg.push(message);
+      }
+    }
+    return venue;
+  };
+
   var checkVenues = function() {
     conflictVenues = [];
     for(var i = 0; i < attendees.length; i++) {
@@ -57,13 +75,9 @@ var App = (function () {
         var food = hasFood(attendees[i], venues[x]),
         drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
-          var conflictVenue = venues[x];
-          if(!conflictVenue.msg) {
-            conflictVenue.msg = [feedBackMessage(food, drink, attendees[i], venues[x])];
-          } else {
-            conflictVenue.msg.push(feedBackMessage(food, drink, attendees[i], venues[x]));
-          }
-          conflictVenues.push(conflictVenue);
+          var feedbackMessage = feedBackMessage(food, drink, attendees[i], venues[x]);
+          var conflictVenue = addFeedbackMessage(venues[x], feedbackMessage);
+          conflictVenues.push(venues[x]);
         };
       };
     };

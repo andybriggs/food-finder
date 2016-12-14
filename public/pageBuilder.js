@@ -49,24 +49,23 @@ var PageBuilder = (function () {
     buildList(module.formData.venues, buildVenueListItem, 'whats-tasty');
   }
 
-  var attachMessages = function(el, messages) {
-    var messageContainer = el.getElementsByTagName('div')[0];
-    if(!messageContainer) {
-      messageContainer = document.createElement('div');
+  var clearMessages = function(el) {
+    var messages = el.getElementsByTagName('div')[0];
+    if(messages) {
+      messages.parentNode.removeChild(messages);
     };
+  };
+
+  var attachMessages = function(el, messages) {
+    clearMessages(el);
+    var messageContainer = el.getElementsByTagName('div')[0];
+    messageContainer =  messageContainer ? messageContainer : document.createElement('div');
     for(var i = 0; i < messages.length; i++) {
       var msgEl = document.createElement('span');
       msgEl.appendChild(document.createTextNode(messages[i]));
       messageContainer.appendChild(msgEl);
     };
     el.appendChild(messageContainer);
-  };
-
-  var clearMessages = function(el) {
-    var messages = el.getElementsByTagName('div')[0];
-    if(messages) {
-      messages.parentNode.removeChild(messages);
-    };
   };
 
   module.scrubVenues = function(conflictVenues) {

@@ -111,11 +111,16 @@ label {
 }
 
 .whats-tasty label {
+  padding: 0;
   cursor: default;
 }
 
 ul .scrubbed {
   background: rgba(255,255,255,0.8);
-  text-decoration: line-through;
+  color: #555;
+}
+
+ul .scrubbed label {
   color: #ccc;
+  text-decoration: line-through;
 }
