@@ -1,13 +1,16 @@
 'use strict';
 
-var FormBuilder = (function () {
+var PageBuilder = (function () {
 
   var module = { formData: {} },
   checkboxUpdate;
 
   var buildVenueListItem = function(venue) {
-    var listItem = document.createElement('li');
-    listItem.appendChild(document.createTextNode(venue.name));
+    var listItem = document.createElement('li'),
+    label = document.createElement('label');
+
+    listItem.appendChild(label);
+    label.appendChild(document.createTextNode(venue.name));
     return listItem;
   };
 
@@ -69,7 +72,7 @@ var FormBuilder = (function () {
     var foodMsg = hasFood ? '' : ' no food ';
     var drinkMsg = hasDrink ? '' : ' no drink ';
     var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
-    console.log(msg);
+    // console.log(msg);
   };
 
   module.formData = function(data) {

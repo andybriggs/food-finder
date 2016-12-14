@@ -8,17 +8,19 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>Where shall we go?</h1>
-    <div id="whos-about" class="col">
-      <h2>Who's about?</h2>
-    </div>
-    <div id="whats-tasty" class="col">
-      <h2>What's tasty?</h2>
-    </div>
+  </header>
+  <div class="whos-about">
+    <h2>Who's about?</h2>
+      <div id="whos-about"></div>
   </div>
-  <script src="./mockDataservice.js"></script>
-  <script src="./formBuilder.js"></script>
+  <div class="whats-tasty">
+    <h2>What's tasty?</h2>
+    <div id="whats-tasty"></div>
+  </div>
+  <script src="./mockDataService.js"></script>
+  <script src="./pageBuilder.js"></script>
   <script src="./app.js"></script>
   <script>
     App.run();

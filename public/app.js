@@ -50,7 +50,7 @@ var App = (function () {
         var food = hasFood(attendees[i], venues[x]),
         drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
-          FormBuilder.feedBackMessage(food, drink, attendees[i], venues[x]);
+          PageBuilder.feedBackMessage(food, drink, attendees[i], venues[x]);
           conflictVenues.push(venues[x].name);
         };
       };
@@ -71,18 +71,19 @@ var App = (function () {
 
   var updateApp = function(el) {
     if(!receivedAppData) {
-      users = FormBuilder.formData.users;
-      venues = FormBuilder.formData.venues;
+      users = PageBuilder.formData.users;
+      venues = PageBuilder.formData.venues;
     };
     var user = getUserData(el.value);
     receivedAppData = true;
     updateAttendees(user, el.checked);
     checkVenues();
-    FormBuilder.scrubVenues(conflictVenues);
+    PageBuilder.scrubVenues(conflictVenues);
+    console.log(venues);
   };
 
   module.run = function() {
-    FormBuilder.build(updateApp);
+    PageBuilder.build(updateApp);
   };
 
   return module;
