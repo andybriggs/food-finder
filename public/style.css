@@ -22,9 +22,10 @@ h1, h2 {
   color: #fff;
   margin: 0;
   text-align: center;
+  font-family: 'CenturyOSMTPro-Italic','times new roman','serif';
 }
 .sub-header {
-  background: #333;
+  background: #e1192c;
   padding: 20px;
   overflow: auto;
 }
@@ -54,6 +55,10 @@ ul {
 
 .whos-about ul {
   padding: 0;
+}
+
+.whos-about li {
+  border-bottom: 1px solid #ccc;
 }
 
 .whos-about > div,
@@ -98,7 +103,8 @@ label {
   cursor: default;
 }
 
-.scrubbed {
+ul .scrubbed {
+  background: rgba(255,255,255,0.8);
   text-decoration: line-through;
   color: #ccc;
 }
