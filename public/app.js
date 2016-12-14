@@ -6,6 +6,7 @@ var App = (function () {
   receivedAppData = false,
   users,
   venues,
+  conflictVenues = [],
   attendees = [];
 
   var getUserData = function(userName) {
@@ -16,25 +17,6 @@ var App = (function () {
       };
     };
     return user;
-  };
-
-  var scrubVenue = function(venue) {
-    var venueListItems = document.getElementsByTagName("li");
-    var el;
-    for (var i = 0; i < venueListItems.length; i++) {
-      if (venueListItems[i].textContent == venue.name) {
-        el = venueListItems[i];
-        break;
-      }
-    }
-    el.className = 'scrubbed';
-  };
-
-  var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
-    var foodMsg = hasFood ? '' : ' no food ';
-    var drinkMsg = hasDrink ? '' : ' no drink ';
-    var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
-    console.log(msg);
   };
 
   var hasDrink = function(attendee, venue) {
@@ -62,15 +44,14 @@ var App = (function () {
   };
 
   var checkVenues = function() {
+    conflictVenues = [];
     for(var i = 0; i < attendees.length; i++) {
       for(var x = 0; x < venues.length; x++) {
         var food = hasFood(attendees[i], venues[x]),
         drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
-          feedBackMessage(food, drink, attendees[i], venues[x]);
-          scrubVenue(venues[x]);
-          console.log('Food at ' + venues[x].name + ': ' + food);
-          console.log('Drink at ' + venues[x].name + ': ' + drink);
+          FormBuilder.feedBackMessage(food, drink, attendees[i], venues[x]);
+          conflictVenues.push(venues[x].name);
         };
       };
     };
@@ -97,8 +78,7 @@ var App = (function () {
     receivedAppData = true;
     updateAttendees(user, el.checked);
     checkVenues();
-    console.log(attendees);
-    console.log(venues);
+    FormBuilder.scrubVenues(conflictVenues);
   };
 
   module.run = function() {

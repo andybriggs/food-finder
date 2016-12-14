@@ -47,6 +47,24 @@ var FormBuilder = (function () {
     buildList(module.formData.venues, buildVenueListItem, 'whats-tasty');
   }
 
+  module.scrubVenues = function(conflictVenues) {
+    var venueListItems = document.getElementsByTagName("li");
+    for (var i = 0; i < venueListItems.length; i++) {
+      for(var x = 0; x < conflictVenues.length; x++) {
+        if (venueListItems[i].textContent == conflictVenues[x]) {
+          venueListItems[i].className = 'scrubbed';
+        }
+      }
+    }
+  };
+
+  module.feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
+    var foodMsg = hasFood ? '' : ' no food ';
+    var drinkMsg = hasDrink ? '' : ' no drink ';
+    var msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' at ' + venue.name;
+    console.log(msg);
+  };
+
   module.formData = function(data) {
     return data;
   }
