@@ -23,61 +23,68 @@ h1, h2 {
   margin: 0;
   text-align: center;
 }
-h2 {
+.sub-header {
   background: #333;
   padding: 20px;
+  overflow: auto;
 }
 p {
   margin-top: 0;
   line-height: 24px;
 }
-.whos-about,
-.whats-tasty {
+
+.col30,
+.col70 {
   float: left;
 }
 
-.whos-about {
+.col30 {
   width: 30%;
 }
 
-.whats-tasty {
-  width: 70%
+.col70 {
+  width: 70%;
 }
 
 ul {
   list-style: none;
   margin: 0;
+  padding: 0;
 }
 
 .whos-about ul {
   padding: 0;
 }
 
-.whos-about > div {
+.whos-about > div,
+.whats-tasty > div {
   padding-left: 20px;
+}
+
+.whats-tasty {
+  padding-right: 20px;
 }
 
 .whos-about ul,
 .whats-tasty li {
   border: 1px solid #ccc;
   background: #fff;
-  margin: 15px auto;
+  margin-top: 20px;
   -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
   box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 }
 
-.whats-tasty ul {
-  margin-top: 10px;
-}
-
 .whats-tasty li {
   float: left;
-  width: 48%;
-  margin: 1%;
+  width: 49%;
+}
+
+.whats-tasty li:nth-child(odd) {
+  margin-right: 2%;
 }
 
 input[type="checkbox"] {
-  margin: 17px 10px 15px;
+  margin: 17px 10px 15px 20px;
   float: left;
 }
 
