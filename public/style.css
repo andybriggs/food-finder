@@ -95,10 +95,6 @@ ul {
   margin: 10px 0;
 }
 
-.foo {
-  border: 5px solid red;
-}
-
 input[type="checkbox"] {
   margin: 17px 10px 15px 20px;
   float: left;
