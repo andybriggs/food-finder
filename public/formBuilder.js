@@ -50,12 +50,19 @@ var FormBuilder = (function () {
   module.scrubVenues = function(conflictVenues) {
     var venueListItems = document.getElementsByTagName("li");
     for (var i = 0; i < venueListItems.length; i++) {
-      for(var x = 0; x < conflictVenues.length; x++) {
-        if (venueListItems[i].textContent == conflictVenues[x]) {
-          venueListItems[i].className = 'scrubbed';
-        }
+      if(conflictVenues.length > 0) {
+        for(var x = 0; x < conflictVenues.length; x++) {
+          if (venueListItems[i].textContent.toUpperCase() == conflictVenues[x].toUpperCase()) {
+            venueListItems[i].className = 'scrubbed';
+            break;
+          } else {
+            venueListItems[i].className = '';
+          };
+        };
+      } else {
+        venueListItems[i].className = '';
       }
-    }
+    };
   };
 
   module.feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
