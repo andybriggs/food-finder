@@ -59,12 +59,12 @@ var App = (function () {
         if(venue.msg[i] === message) {
           messageExists = true;
           break;
-        }
-      }
+        };
+      };
       if(!messageExists) {
         venue.msg.push(message);
-      }
-    }
+      };
+    };
     return venue;
   };
 
