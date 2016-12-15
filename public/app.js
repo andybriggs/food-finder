@@ -43,8 +43,8 @@ var App = (function () {
   };
 
   var feedBackMessage = function(hasFood, hasDrink, attendee, venue) {
-    var foodMsg = hasFood ? '' : ' nothing to eat ',
-    drinkMsg = hasDrink ? '' : ' nothing to drink ',
+    var foodMsg = hasFood ? '' : 'nothing to eat',
+    drinkMsg = hasDrink ? '' : 'nothing to drink',
     msg =  'There is ' + foodMsg + drinkMsg + ' for ' + attendee.name + ' here';
     return msg;
   };
