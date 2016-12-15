@@ -49,22 +49,43 @@ var App = (function () {
     return msg;
   };
 
-  var addFeedbackMessage = function(venue, message) {
-    if(!venue.msg) {
-      venue.msg = [message];
+  var addFeedbackMessage = function(conflictVenue, message) {
+    if(!conflictVenue.msg) {
+      conflictVenue.msg = [message];
     } else {
       var messageExists = false;
-      for(var i = 0; i < venue.msg.length; i++) {
-        if(venue.msg[i] === message) {
+      for(var i = 0; i < conflictVenue.msg.length; i++) {
+        if(conflictVenue.msg[i] === message) {
           messageExists = true;
           break;
         }
       }
       if(!messageExists) {
-        venue.msg.push(message);
+        conflictVenue.msg.push(message);
       }
     }
-    return venue;
+    return conflictVenue;
+  };
+
+  var clearAtendeeMessages = function(attendee) {
+    for(var i = 0; i < venues.length; i++) {
+      if(venues[i].msg) {
+        for(var x = 0; x < venues[i].msg.length; x++) {
+          if(venues[i].msg[x].indexOf(attendee) > 0) {
+            venues[i].msg.splice(x,1);
+          }
+        }
+      }
+    }
+  };
+
+  var addConflictVenue = function(conflictVenue) {
+    for (var i = 0; i < conflictVenues.length; i++) {
+      if(conflictVenues[i].name === conflictVenue.name) {
+        return false;
+      }
+    }
+    conflictVenues.push(conflictVenue);
   };
 
   var checkVenues = function() {
@@ -75,8 +96,8 @@ var App = (function () {
         drink = hasDrink(attendees[i], venues[x]);
         if(!food || !drink) {
           var feedbackMessage = feedBackMessage(food, drink, attendees[i], venues[x]);
-          var conflictVenue = addFeedbackMessage(venues[x], feedbackMessage);
-          conflictVenues.push(venues[x]);
+          addFeedbackMessage(venues[x], feedbackMessage);
+          addConflictVenue(venues[x]);
         }
       }
     }
@@ -88,6 +109,7 @@ var App = (function () {
     } else {
       for(var i = 0; i < attendees.length; i++) {
         if(attendees[i].name === user.name) {
+          clearAtendeeMessages(attendees[i].name);
           attendees.splice(i,1);
         }
       }
