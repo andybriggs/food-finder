@@ -1,6 +1,5 @@
-'use strict';
-
 var PageBuilder = (function () {
+  'use strict';
 
   var module = { formData: {} },
   checkboxUpdate;
@@ -24,7 +23,7 @@ var PageBuilder = (function () {
       checkboxUpdate(this);
     });
 
-    var label = document.createElement('label')
+    var label = document.createElement('label');
     label.htmlFor = 'chk' + id;
     label.appendChild(document.createTextNode(user.name));
 
@@ -39,7 +38,7 @@ var PageBuilder = (function () {
     for (var i = 0; i < listItems.length; i++) {
       var row = listItemBuilder(listItems[i], i);
       newList.appendChild(row);
-    };
+    }
     document.getElementById(el).appendChild(newList);
   };
 
@@ -47,13 +46,13 @@ var PageBuilder = (function () {
     module.formData = data;
     buildList(module.formData.users, buildUserListItem, 'whos-about');
     buildList(module.formData.venues, buildVenueListItem, 'whats-tasty');
-  }
+  };
 
   var clearMessages = function(el) {
     var messages = el.getElementsByTagName('div')[0];
     if(messages) {
       messages.parentNode.removeChild(messages);
-    };
+    }
   };
 
   var attachMessages = function(el, messages) {
@@ -64,7 +63,7 @@ var PageBuilder = (function () {
       var msgEl = document.createElement('span');
       msgEl.appendChild(document.createTextNode(messages[i]));
       messageContainer.appendChild(msgEl);
-    };
+    }
     el.appendChild(messageContainer);
   };
 
@@ -81,18 +80,18 @@ var PageBuilder = (function () {
           } else {
             venueListItems[i].className = '';
             clearMessages(venueListItems[i]);
-          };
-        };
+          }
+        }
       } else {
         venueListItems[i].className = '';
         clearMessages(venueListItems[i]);
       }
-    };
+    }
   };
 
   module.formData = function(data) {
     return data;
-  }
+  };
 
   module.build = function(update) {
     checkboxUpdate = update;

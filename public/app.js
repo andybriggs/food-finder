@@ -1,6 +1,5 @@
-'use strict';
-
 var App = (function () {
+  'use strict';
 
   var module = {},
   receivedAppData = false,
@@ -14,8 +13,8 @@ var App = (function () {
     for(var i = 0; i < users.length; i++) {
       if(users[i].name === userName) {
         user = users[i];
-      };
-    };
+      }
+    }
     return user;
   };
 
@@ -25,9 +24,9 @@ var App = (function () {
       for(var x = 0; x < attendee.drinks.length; x++) {
         if(venue.drinks[i].toUpperCase() === attendee.drinks[x].toUpperCase()) {
           drinks ++;
-        };
-      };
-    };
+        }
+      }
+    }
     return drinks > 0 ? true : false;
   };
 
@@ -37,9 +36,9 @@ var App = (function () {
       for(var x = 0; x < attendee.wont_eat.length; x++) {
         if(venue.food[i] === attendee.wont_eat[x]) {
           conflicts ++;
-        };
-      };
-    };
+        }
+      }
+    }
     return conflicts === venue.food.length ? false : true;
   };
 
@@ -59,12 +58,12 @@ var App = (function () {
         if(venue.msg[i] === message) {
           messageExists = true;
           break;
-        };
-      };
+        }
+      }
       if(!messageExists) {
         venue.msg.push(message);
-      };
-    };
+      }
+    }
     return venue;
   };
 
@@ -78,9 +77,9 @@ var App = (function () {
           var feedbackMessage = feedBackMessage(food, drink, attendees[i], venues[x]);
           var conflictVenue = addFeedbackMessage(venues[x], feedbackMessage);
           conflictVenues.push(venues[x]);
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   var updateAttendees = function(user, checked) {
@@ -90,16 +89,16 @@ var App = (function () {
       for(var i = 0; i < attendees.length; i++) {
         if(attendees[i].name === user.name) {
           attendees.splice(i,1);
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   var updateApp = function(el) {
     if(!receivedAppData) {
       users = PageBuilder.formData.users;
       venues = PageBuilder.formData.venues;
-    };
+    }
     var user = getUserData(el.value);
     receivedAppData = true;
     updateAttendees(user, el.checked);

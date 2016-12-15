@@ -1,6 +1,5 @@
-'use strict';
-
 var MockDataService = (function () {
+  'use strict';
 
   var module = {};
 
